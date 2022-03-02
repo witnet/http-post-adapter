@@ -24,18 +24,27 @@ const server = micro(async (req, res) => {
     throw createError(429, 'Rate limit exceeded')
   }
 
-  // Parse URL parameters 
+  // Parse URL parameters
   const url = new URL('http://localhost' + req.url)
   const endpoint = url.searchParams.get('endpoint')
   const dataParam = url.searchParams.get('data')
+  if (!endpoint || !url) {
+    const missingParams = []
+    if (!endpoint) missingParams.push('endpoint')
+    if (!dataParam) missingParams.push('data')
+    throw createError(400, `the following params are missing: ${missingParams}`)
+  }
+  try {
+    const { data } = await got
+      .post(endpoint, {
+        json: JSON.parse(dataParam)
+      })
+      .json()
 
-  const { data } = await got
-    .post(endpoint, {
-      json: JSON.parse(dataParam)
-    })
-    .json()
-
-  return data
+    return data
+  } catch (e) {
+    throw createError(500, 'Error running your HTTP-POST request. Ensure that the provided params are valid')
+  }
 })
 
 server.listen(PORT)
