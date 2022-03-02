@@ -1,0 +1,14 @@
+version: '2'
+
+services:
+  httppostadapter:
+    image: witnet/http-post-adapter
+    # build:
+    #   context: packages/api
+    container_name: http-post-adapter
+    ports:
+      - $PORT:3000
+    environment:
+      PORT: 3000 
+      REQUEST_PER_DURATION: 3
+      RATE_LIMIT_DURATION: 1

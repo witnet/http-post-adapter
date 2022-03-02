@@ -1,0 +1,25 @@
+{
+  "name": "http-post-adapter",
+  "version": "1.0.0",
+  "description": "HTTP service that makes an HTTP-POST request with the arguments given",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js",
+    "lint": "standard --fix"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "devDependencies": {
+    "standard": "16.0.4"
+  },
+  "dependencies": {
+    "dotenv": "16.0.0",
+    "got": "12.0.1",
+    "micro": "9.3.4",
+    "nodemon": "2.0.15",
+    "rate-limiter-flexible": "2.3.6"
+  }
+}
